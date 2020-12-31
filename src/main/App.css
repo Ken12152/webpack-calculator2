@@ -1,0 +1,46 @@
+.app {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator {
+    width: 250px;
+    height: 340px;
+    background-color: skyblue;
+
+    /* css grid */
+    display: grid;
+    grid-template-rows: 85px repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: 
+        "display display display display "
+        "ac sign percent division"
+        "seven eight nine multiplication"
+        "four five six subtraction"
+        "one two three addition"
+        "ziro ziro decpoint equal";
+}
+
+.display        { grid-area: display; }
+.ac             { grid-area: ac; }
+.sign           { grid-area: sign; }
+.percent        { grid-area: percent;  }
+.addition       { grid-area: addition; }
+.subtraction    { grid-area: subtraction; }
+.multiplication { grid-area: multiplication; }
+.division       { grid-area: division; }
+.equal          { grid-area: equal; }
+.decpoint       { grid-area: decpoint; }   
+
+.ziro  { grid-area: ziro;  }
+.one   { grid-area: one;   }
+.two   { grid-area: two;   }
+.three { grid-area: three; }
+.four  { grid-area: four;  }
+.five  { grid-area: five;  }
+.six   { grid-area: six;   }
+.seven { grid-area: seven; }
+.eight { grid-area: eight; }
+.nine  { grid-area: nine;  }
