@@ -12,10 +12,10 @@ export function addDecimal(displayNumber, number) {
         newDisplayNumber = displayNumber + number
     }
 
-    return {
+    return [{
         type: 'calculator/addDecimal',
         payload: newDisplayNumber
-    }
+    }, changeWaitingStatus(false)]
 }
 
 export function addDecimalPoint(displayNumber) {
@@ -29,10 +29,13 @@ export function addDecimalPoint(displayNumber) {
 }
 
 export function clearDisplay() {
-    return { type: 'calculator/clearDisplay' }
+    return [
+        { type: 'calculator/clearDisplay' },
+        changeWaitingStatus(false)
+    ]
 }
 
-export function addOperation(displayNumber, operations, addOperation) {
+export function addOperation(operations, addOperation) {
     const newOperations = [].concat(operations, addOperation)
 
     return {
@@ -41,11 +44,46 @@ export function addOperation(displayNumber, operations, addOperation) {
     }
 }
 
+export function addOperand(operands, displayNumber) {
+    const newOperands = [].concat(operands, parseFloat(displayNumber))
+
+    return {
+        type: 'calculator/addOperand',
+        payload: newOperands
+    }
+}
+
+export function updateFormula(operations, operation, operands, displayNumber) {
+    return [
+        addOperation(operations, operation),
+        addOperand(operands, displayNumber),
+        changeWaitingStatus(true)
+    ]
+}
+
+export function changeWaitingStatus(status) {
+    return {
+        type: 'calculator/changeWaitingStatus',
+        payload: status
+    }
+}
+
+export function resetAC() {
+    return [
+        clearDisplay(),
+        changeWaitingStatus(false)
+    ]
+}
+
+export function toNextNumber() {
+    return [
+        clearDisplay()
+    ]
+}
+
 const actions = {
-    addDecimal,
-    addDecimalPoint,
-    clearDisplay,
-    addOperation,
+    addDecimal, addDecimalPoint, clearDisplay,
+    addOperation, updateFormula,
 }
 
 export default actions

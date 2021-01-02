@@ -1,4 +1,3 @@
-import {  } from 'react-redux'
 import { combineReducers } from 'redux'
 
 import calculatorReducer from './reducers/calculatorReducer'

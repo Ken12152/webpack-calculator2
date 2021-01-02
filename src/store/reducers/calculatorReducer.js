@@ -1,6 +1,8 @@
 const INITIAL_STATE = {
     displayValue: '',
     operations: [],
+    operands: [],
+    waitNextNumber: false,
 }
 
 export default function(state = INITIAL_STATE, action) {
@@ -11,6 +13,10 @@ export default function(state = INITIAL_STATE, action) {
             return { ...state, displayValue: '0' }
         case 'calculator/addOperation':
             return { ...state, operations: action.payload }
+        case 'calculator/addOperand':
+            return { ...state, operands: action.payload }
+        case 'calculator/changeWaitingStatus':
+            return { ...state, waitNextNumber: action.payload }
         default:
             return state
     }
